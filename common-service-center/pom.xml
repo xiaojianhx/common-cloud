@@ -21,4 +21,57 @@
         </dependency>
 
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>com.xiaojianhx.common.cloud.eureka.Application</mainClass>
+                        </manifest>
+                    </archive>
+                    <excludes>
+                        <exclude>logback*.xml</exclude>
+                        <exclude>application.properties</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>make-zip</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>/package.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <configuration>
+                    <serverId>server.prod</serverId>
+                    <fromDir>target</fromDir>
+                    <includes>*.tar.gz</includes>
+                    <url>scp://username:password@192.168.1.161/tmp</url>
+                    <commands>
+                    </commands>
+                    <displayCommandOutputs>true</displayCommandOutputs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
