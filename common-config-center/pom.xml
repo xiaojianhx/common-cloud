@@ -38,8 +38,12 @@
                         </manifest>
                     </archive>
                     <excludes>
-                        <exclude>logback*.xml</exclude>
-                        <exclude>application.properties</exclude>
+                        <exclude>**/*logback*.xml</exclude>
+                        <exclude>**/*application.properties</exclude>
+                        <exclude>**/*.sh</exclude>
+                        <exclude>**/*.jar</exclude>
+                        <exclude>**/config/*</exclude>
+                        <exclude>**/config</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -62,6 +66,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>wagon-maven-plugin</artifactId>
