@@ -15,6 +15,7 @@ public class MailServiceImpl implements MailService {
     private JavaMailSender mailSender;
 
     public void send(MailForm form) {
+
         System.out.println(mailSender);
 
         SimpleMailMessage message = new SimpleMailMessage();
